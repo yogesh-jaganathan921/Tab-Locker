@@ -1,9 +1,59 @@
-<script type="module" src="content.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Locker</title>
+    <link rel="stylesheet" href="popup.css">
+    <script type="module" src="popup.js"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">A LITTLE HELP STAYING FOCUSED</p>
+        <h1>Tab Locker</h1>
+        <p class="intro">Take a quick detour. Come back on time.</p>
+      </header>
 
-<div class="container">
-  <div>
-    <div class="title">Your primary tab:</div>
-    <div class="tab" id="primary-tab"></div>
-    <button class="tab-selection">Select Primary Tab</button>
-  </div>
-</div>
+      <section class="card" aria-labelledby="default-heading">
+        <h2 id="default-heading">Your default tab</h2>
+        <p id="primary-tab" class="tab-title">No default tab selected</p>
+        <button id="select-primary" type="button">Use current tab</button>
+      </section>
+
+      <form id="limit-form" class="card">
+        <label for="limit-seconds">Allowed time away</label>
+        <div class="input-row">
+          <input id="limit-seconds" type="number" min="30" max="86400" step="1" required value="60">
+          <span>seconds</span>
+          <button type="submit">Save</button>
+        </div>
+        <p class="hint">30 seconds to 24 hours. Tab hopping keeps the same countdown.</p>
+      </form>
+
+      <section class="card" aria-labelledby="status-heading">
+        <h2 id="status-heading">Tracking</h2>
+        <p id="status" role="status" aria-live="polite">Loading…</p>
+        <p id="countdown" class="countdown" role="timer"></p>
+        <div class="button-row">
+          <button id="toggle-tracking" class="primary" type="button" disabled>Start tracking</button>
+          <button id="return-now" type="button" disabled>Return now</button>
+        </div>
+      </section>
+
+      <p id="error" class="error" role="alert" hidden></p>
+      <p id="notice" class="hint" role="status"></p>
+
+      <section class="history-section" aria-labelledby="history-heading">
+        <div class="history-heading">
+          <h2 id="history-heading">Recent departures</h2>
+          <button id="clear-history" class="text-button" type="button">Clear</button>
+        </div>
+        <ol id="history"></ol>
+        <p id="empty-history" class="hint">Your departures and returns will appear here.</p>
+      </section>
+
+      <footer>Stored on this device. Timers may run late after sleep. Choose a default tab again after restarting Chrome.</footer>
+    </main>
+  </body>
+</html>
